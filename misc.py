@@ -11,10 +11,10 @@ import tempfile
 import ctypes
 import mss
 import mss.tools
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+#import pytesseract
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 from paddleocr import PaddleOCR
-from paddleocr.tools.infer import predict_system
+#from paddleocr.tools.infer import predict_system
 import logging
 import paddle
 import os
