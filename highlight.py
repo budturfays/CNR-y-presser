@@ -92,37 +92,38 @@ def open_manual_region_window(manual_region_var, hwnd):
     if last_region:
         last_left, last_top, last_right, last_bottom = eval(last_region)
     else:
-        last_left, last_top, last_right, last_bottom = 0, 0, 0, 0
+        last_left, last_top, last_right, last_bottom =20, 40, 250, 100
 
     manual_window = tk.Toplevel()
     manual_window.title("Manual Region Input")
 
-    tk.Label(manual_window, text="Left:").grid(row=0, column=0)
+    tk.Label(manual_window, text="Left:").grid(row=1, column=0)
     entry_left = tk.Entry(manual_window)
-    entry_left.grid(row=0, column=1)
+    entry_left.grid(row=1, column=1)
     entry_left.insert(0, str(last_left))  # Set last input value
 
-    tk.Label(manual_window, text="Top:").grid(row=1, column=0)
+    tk.Label(manual_window, text="Top:").grid(row=2, column=0)
     entry_top = tk.Entry(manual_window)
-    entry_top.grid(row=1, column=1)
+    entry_top.grid(row=2, column=1)
     entry_top.insert(0, str(last_top))  # Set last input value
 
-    tk.Label(manual_window, text="Right:").grid(row=2, column=0)
+    tk.Label(manual_window, text="Right:").grid(row=3, column=0)
     entry_right = tk.Entry(manual_window)
-    entry_right.grid(row=2, column=1)
+    entry_right.grid(row=3, column=1)
     entry_right.insert(0, str(last_right))  # Set last input value
 
-    tk.Label(manual_window, text="Bottom:").grid(row=3, column=0)
+    tk.Label(manual_window, text="Bottom:").grid(row=4, column=0)
     entry_bottom = tk.Entry(manual_window)
-    entry_bottom.grid(row=3, column=1)
+    entry_bottom.grid(row=4, column=1)
     entry_bottom.insert(0, str(last_bottom))  # Set last input value
 
     # Display the current PID window size
-    tk.Label(manual_window, text=f"Current PID window size:\nLeft: {win_left}, Top: {win_top}, Width: {win_width}, Height: {win_height}").grid(row=4, column=0, columnspan=2)
+    tk.Label(manual_window, text=f"Current PID window size:\nLeft: {win_left}, Top: {win_top}, Width: {win_width}, Height: {win_height}").grid(row=5, column=0, columnspan=2)
 
     # Display the default relative coordinates
-    tk.Label(manual_window, text=f"Default relative coordinates:\nLeft: 680, Top: 555, Right: 790, Bottom: 590").grid(row=5, column=0, columnspan=2)
+    tk.Label(manual_window, text=f"Default setting coordinates:\nLeft: 680, Top: 555, Right: 790, Bottom: 590").grid(row=6, column=0, columnspan=2)
 
-    tk.Button(manual_window, text="Submit", command=on_submit).grid(row=6, column=0, columnspan=2)
+    tk.Button(manual_window, text="Submit", command=on_submit).grid(row=7, column=0, columnspan=2)
+    tk.Label(manual_window, text=f"Pre-input are for Top-Left conner.\nYou can submit without any change value.").grid(row=0, column=0, columnspan=2)
 
     manual_window.mainloop()

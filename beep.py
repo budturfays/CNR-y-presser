@@ -9,16 +9,16 @@ def open_beep_window(root, textbox, update_status, reload_function, status, wind
 
     Label(beep_window, text="Frequency (Hz)").grid(row=0, column=0)
     Label(beep_window, text="Wave length (ms)").grid(row=1, column=0)
-    Label(beep_window, text="Cool down (s)").grid(row=2, column=0)
+    Label(beep_window, text="Auto press cooldown (s)").grid(row=2, column=0)
 
     var1 = DoubleVar()
     var2 = DoubleVar()
     var3 = DoubleVar()
 
-    scale1 = Scale(beep_window, variable=var1, from_=500, to=5000, orient='horizontal')
+    scale1 = Scale(beep_window, variable=var1, from_=100, to=10000, orient='horizontal')
     scale1.grid(row=0, column=2)
 
-    scale2 = Scale(beep_window, variable=var2, from_=500, to=3000, orient='horizontal')
+    scale2 = Scale(beep_window, variable=var2, from_=100, to=3000, orient='horizontal')
     scale2.grid(row=1, column=2)
 
     scale3 = Scale(beep_window, variable=var3, from_=0, to=5, orient='horizontal')
