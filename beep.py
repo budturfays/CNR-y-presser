@@ -15,10 +15,10 @@ def open_beep_window(root, textbox, update_status, reload_function, status, wind
     var2 = DoubleVar()
     var3 = DoubleVar()
 
-    scale1 = Scale(beep_window, variable=var1, from_=100, to=10000, orient='horizontal')
+    scale1 = Scale(beep_window, variable=var1, from_=300, to=10000, orient='horizontal')
     scale1.grid(row=0, column=2)
 
-    scale2 = Scale(beep_window, variable=var2, from_=100, to=3000, orient='horizontal')
+    scale2 = Scale(beep_window, variable=var2, from_=0, to=3000, orient='horizontal')
     scale2.grid(row=1, column=2)
 
     scale3 = Scale(beep_window, variable=var3, from_=0, to=5, orient='horizontal')
