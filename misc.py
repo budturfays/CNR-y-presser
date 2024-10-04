@@ -158,6 +158,8 @@ def detect_and_press_y_OCR(hwnd, region, cooldown, frequency, wavelength, textbo
                 update_status(textbox, f"sold {count} times.")
                 last_press_time = current_time
                 force_foreground_window(previous_hwnd)
+            else:
+                update_status(textbox, f"Waiting for cooldown... {cooldown - (current_time - last_press_time):.1f} seconds left")
         else:
             current_time = time.time()
             if auto_shutdown.get() and current_time - last_y_time > shutdown_timeout:
