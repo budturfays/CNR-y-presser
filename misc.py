@@ -110,7 +110,7 @@ def open_debugshot_window(screenshot_path, reference_image_path=None):
 
 def detect_and_press_y_OCR(hwnd, region, cooldown, frequency, wavelength, textbox, status, auto_shutdown, stop_event):
     last_y_time = time.time()
-    shutdown_timeout = 300
+    shutdown_timeout = 5
     ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=True, det=False)
     count = 0
     last_press_time = 0
@@ -163,13 +163,11 @@ def detect_and_press_y_OCR(hwnd, region, cooldown, frequency, wavelength, textbo
                 force_foreground_window(previous_hwnd)
         else:
             current_time = time.time()
-            if current_time - last_y_time > shutdown_timeout:
-                if auto_shutdown.get():  # Check if the auto-shutdown is enabled
-                    close_process(hwnd)  # Close the process
-                    shutdown_pc()  # Shut down the PC
-                    break
-            else:
-                status.set(f"Detecting... {current_time - last_y_time:.0f}")
+            if auto_shutdown.get() and current_time - last_y_time > shutdown_timeout:
+                close_process(hwnd)
+                #shutdown_pc()
+                break
+            status.set(f"Detecting... {current_time - last_y_time:.0f}")
 
         time.sleep(2)  # Delay between checks
     print("OCR detection stopped.")
@@ -274,6 +272,7 @@ def close_process(hwnd):
     # Close the attached process
     print(f"Closing process with HWND: {hwnd}")
     ctypes.windll.user32.PostMessageW(hwnd, 0x0010, 0, 0)  # WM_CLOSE
+    time.sleep(100)
 
 def shutdown_pc():
     # Shut down the PC
