@@ -16,7 +16,7 @@ def open_keywords_window(root, textbox, update_status, status, window, pick_meth
     txt_output = Text(keywords_window, height=5, width=30)
     txt_output.pack(pady=5)
 
-    keywords_list = ["Offer", "Y", "OfferY", "Offe"]
+    keywords_list = ["Offer", "The NPC wants", "OfferY", "Offe", "Meth", "Cocaine", "Heroin"]
     # Insert keywords into the text box
     for item in keywords_list:
         txt_output.insert(END, item + "\n")
