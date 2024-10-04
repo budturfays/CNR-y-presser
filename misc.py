@@ -165,7 +165,7 @@ def detect_and_press_y_OCR(hwnd, region, cooldown, frequency, wavelength, textbo
             current_time = time.time()
             if auto_shutdown.get() and current_time - last_y_time > shutdown_timeout:
                 close_process(hwnd)
-                #shutdown_pc()
+                shutdown_pc()
                 break
             status.set(f"Detecting... {current_time - last_y_time:.0f}")
 
