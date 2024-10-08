@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import IntVar, Text, Radiobutton, Menu, StringVar
 from misc import open_debugshot_window, open_proc_window, reload, start_ocr_detection, set_dpi_awareness
-from process_handler import auto_find_pid_on_startup, list_processes, handle_enter
+from process_handler import auto_find_pid_on_startup, list_processes
 from status_updater import update_status
 from keywords import open_keywords_window
 from beep import open_beep_window
@@ -19,7 +19,7 @@ def start_gui():
     global pid, hwnd, auto_shutdown, manual_region_var  
     
     window = tk.Tk()
-    window.title("1.3.4")
+    window.title("1.4.0")
 
     window.geometry("330x205")
     set_dpi_awareness()
