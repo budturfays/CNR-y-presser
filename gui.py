@@ -19,7 +19,7 @@ def start_gui():
     global pid, hwnd, auto_shutdown, manual_region_var  
     
     window = tk.Tk()
-    window.title("1.4.0")
+    window.title("1.4.1")
 
     window.geometry("330x205")
     set_dpi_awareness()
