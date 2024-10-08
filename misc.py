@@ -177,11 +177,11 @@ def detect_and_press_y_OCR(hwnd, region, cooldown, frequency, wavelength, textbo
 def reload(textbox, status, window, pick_method):
     global stop_event, ocr_thread
 
-    # Signal the thread to stop
-    stop_event.set()
-
-    if ocr_thread is not None:
+    # Stop the OCR detection thread
+    if ocr_thread is not None and ocr_thread.is_alive():
+        stop_event.set()  # Signal the thread to stop
         ocr_thread.join()  # Wait for the OCR detection thread to finish
+        ocr_thread = None  # Reset the thread object
     
     # Reset the stop event for the next run
     stop_event.clear()
@@ -200,15 +200,22 @@ def reload(textbox, status, window, pick_method):
 
     if pid is not None and hwnd is not None:
         update_status(textbox, f"Reloaded with PID {pid} and HWND {hwnd}")
-        update_status(textbox, "Refreshing display scale... if freeze, re-open program")
+        update_status(textbox, "Refreshing display scale... If it freezes, please restart the program.")
+        
+        # Reset DPI awareness (if necessary)
         set_dpi_awareness()
-        pick_method()
+        
+        # Re-run the desired method (e.g., OCR detection)
+        ocr_thread = threading.Thread(target=pick_method)
+        ocr_thread.start()  # Start the OCR detection in a new thread
     else:
-        update_status(textbox, "Reload failed to find a valid PID or HWND. Please check manually.")
-        status.set("Manual input may be required.")
+        # Retry the process finding in 5 seconds if it fails
+        update_status(textbox, "Reload failed to find a valid PID or HWND. Retrying in 5 seconds...")
+        status.set("Retrying...")
+        window.after(5000, lambda: reload(textbox, status, window, pick_method))  # Retry after 5 seconds
 
-    
     textbox.config(state=tk.DISABLED)  # Optionally, disable the textbox after reloading
+
 
 
 def force_foreground_window(hwnd):
